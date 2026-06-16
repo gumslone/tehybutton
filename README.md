@@ -45,6 +45,27 @@ refreshes the shipped `tehybutton.ino.esp8285.bin`. Requires
 [arduino-cli](https://arduino.github.io/arduino-cli/) with the
 `esp8266:esp8266` core (2.7.4) installed.
 
+## Flashing
+
+[BugZapper](https://github.com/gumslone/bugzapper) is bundled (as a submodule
+under `tools/bugzapper/`) to flash the firmware and watch the serial output in
+one place — no NodeMCU PyFlasher or CoolTerm needed. esptool is vendored
+(pure Python), so a plain `python3` is enough; the GUI additionally needs Tk
+(`brew install python-tk@3.10`).
+
+```sh
+./bugzapper.sh        # GUI: pick port / firmware / baud, flash and monitor
+./flash.sh            # CLI: flash the shipped tehybutton.ino.esp8285.bin
+./flash.sh -e         # erase all flash, then write
+./flash.sh -l         # list detected serial ports
+./flash.sh -h         # full option help
+```
+
+Both default to the shipped `tehybutton.ino.esp8285.bin`; pass `-f` (CLI) or
+**Browse…** (GUI) to flash a different build. Clone with
+`git clone --recurse-submodules`, or run `git submodule update --init` in an
+existing checkout, to fetch `tools/bugzapper/`.
+
 ## Web UI development
 
 The dashboard pages under `tehybutton/v1/` are served from tehybug.com and
